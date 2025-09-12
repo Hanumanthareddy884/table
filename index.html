@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Festive Fire — Professional Price List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* small custom styles to complement Tailwind */
+        
+        .page {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+        }
+        
+        .logo-placeholder {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <div class="page px-4">
+        <div class="card p-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="logo-placeholder">FF</div>
+                    <div>
+                        <h1 class="text-2xl font-extrabold">Festive Fire</h1>
+                        <p class="text-sm text-gray-500">Wholesale Fireworks & Festive Supplies</p>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <p class="font-semibold">Price List</p>
+                    <p class="text-sm text-gray-500">Date: <span id="today-date"></span></p>
+                </div>
+            </div>
+
+            <hr class="my-6" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <h3 class="font-semibold mb-2">Customer</h3>
+                    <div class="space-y-2">
+                        <input id="cust-name" class="w-full p-2 rounded border border-gray-200" placeholder="Customer name (To)" />
+                        <input id="cust-phone" class="w-full p-2 rounded border border-gray-200" placeholder="Phone" />
+                        <input id="cust-address" class="w-full p-2 rounded border border-gray-200" placeholder="Address" />
+                    </div>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <h3 class="font-semibold mb-2">Invoice / Order</h3>
+                    <div class="space-y-2">
+                        <input id="order-no" class="w-full p-2 rounded border border-gray-200" placeholder="Order # (optional)" />
+                        <select id="price-type" class="w-full p-2 rounded border border-gray-200">
+              <option value="retail">Retail Prices</option>
+              <option value="wholesale" selected>Wholesale Prices</option>
+            </select>
+                        <div class="flex gap-2">
+                            <button id="clearBtn" class="no-print flex-1 py-2 rounded bg-gray-100 hover:bg-gray-200">Clear</button>
+                            <button id="exportPdfBtn" class="no-print flex-1 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Export PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table id="price-table" class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-left">
+                            <th class="p-3 border">S.No</th>
+                            <th class="p-3 border">Product</th>
+                            <th class="p-3 border">Unit contents</th>
+                            <th class="p-3 border">Price</th>
+                            <th class="p-3 border">Qty</th>
+                            <th class="p-3 border">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- We'll programmatically populate similar rows from the original list -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="p-3 text-right font-semibold border">Grand Total</td>
+                            <td id="grand-total" class="p-3 font-bold border">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="text-sm text-gray-600">
+                    <p class="font-semibold">Terms & Notes</p>
+                    <p>Prices subject to stock availability. Delivery and taxes extra as applicable. Online sale of certain fireworks may be restricted as per local law.</p>
+                </div>
+                <div class="text-sm text-right text-gray-600">
+                    <p class="font-semibold">Contact</p>
+                    <p>Phone: +91 7022424617</p>
+                    <p class="mt-2">Visit our site: <a href="https://festivefire.netlify.app" target="_blank" class="text-blue-600">festivefire.netlify.app</a></p>
+                </div>
+            </div>
+
+        </div>
+        <!-- card -->
+    </div>
+    <!-- page -->
+
+
+    <script>
+        // Product list copied/adapted from the user's original HTML
+        const PRODUCTS = [
+            ["7 cm Electric (10pcs)", "1 PKT / 10 pcs", 9],
+            ["7 cm Color (10pcs)", "1 PKT / 10 pcs", 11],
+            ["10 cm Electric (10pcs)", "1 PKT / 10 pcs", 15],
+            ["10 cm Color (10pcs)", "1 PKT / 10 pcs", 18],
+            ["2 3/4\" Kurvi Special (5pcs)", "1 PKT / 5 pcs", 9],
+            ["3 1/2\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 14],
+            ["4\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 21],
+            ["4\" Gold Laxmi (5pcs)", "1 PKT / 5 pcs", 35],
+            ["Hydro Bomb (10pcs)", "1 PKT / 10 pcs", 100],
+            ["King Bomb (10pcs)", "1 PKT / 10 pcs", 125],
+            ["Classic Bomb (10pcs)", "1 PKT / 10 pcs", 150],
+            ["555 Thunder Bomb (10pcs)", "1 PKT / 10 pcs", 170],
+            ["Digital Bomb (10pcs)", "1 PKT / 10 pcs", 250],
+            ["Kit kat (10pcs)", "1 PKT / 10 pcs", 45],
+            ["Adiyal Paper Bomb 1/2 kg (1pc/box)", "1 BOX / 1 pc", 150],
+            ["Adiyal Paper Bomb 1/4 kg (1pc/box)", "1 BOX / 1 pc", 75],
+            ["Flower Pot Big (10pcs)", "1 PKT / 10 pcs", 69],
+            ["Flower Pot (Ashoka) (10pcs)", "1 PKT / 10 pcs", 125],
+            ["Flower Pot Special (10pcs)", "1 PKT / 10 pcs", 95],
+            ["Flower Pot Bomb (10 pcs/box)", "1 BOX / 10 pcs", 140],
+            ["100 Wala", "1 PKT", 50],
+            ["28 Giant", "1 PKT", 20],
+            ["1k Wala (Prime)", "1 BOX", 260],
+            ["1000 wala premium", "1 BOX", 400],
+            ["Roll Cap(10 pcs)", "1 PKT / 10 pcs", 15],
+            ["Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 110],
+            ["Twinkling Star(10pcs)", "1 PKT / 10 pcs", 30],
+            ["Red Bijili ~(100pcs)", "1 PKT / 100 pcs", 38],
+            ["12 Shot Rider", "1 BOX", 180],
+            ["30 Shot Multi color (Brand)", "1 BOX", 460],
+            ["50 Shot Rider", "1 BOX", 600],
+            ["Sky Shot", "1 BOX", 15],
+            ["2\" Arial Fancy(3 pcs)", "1 PKT / 3 pcs", 350],
+            ["Chakra big (10pcs)", "1 PKT / 10 pcs", 40],
+            ["Chakra big (25pcs)", "1 PKT / 25 pcs", 110],
+            ["Chakra Delux (10pcs)", "1 PKT / 10 pcs", 125],
+            ["Chakra Disco Wheel(5 pcs)", "1 PKT / 5 pcs", 85],
+            ["Twinkling star (10pcs)", "1 PKT / 10 pcs", 20],
+            ["Peacock (5 side)", "1 BOX", 260]
+        ];
+
+        const tbody = document.querySelector('#price-table tbody');
+        const grandTotalEl = document.getElementById('grand-total');
+
+        function formatNumber(v) {
+            return Number(v).toFixed(2).replace(/\.00$/, '');
+        }
+
+        function buildTable() {
+            tbody.innerHTML = '';
+            PRODUCTS.forEach((p, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = 'align-top';
+                tr.innerHTML = `
+          <td class="p-3 border">${idx+1}</td>
+          <td class="p-3 border">${p[0]}</td>
+          <td class="p-3 border">${p[1]}</td>
+          <td class="p-3 border">${formatNumber(p[2])}</td>
+          <td class="p-3 border"><input type="number" min="0" value="0" class="qty-input w-20 p-1 rounded border border-gray-200" /></td>
+          <td class="p-3 border subtotal">""</td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function calculateTotals() {
+            let grand = 0;
+            const rows = tbody.querySelectorAll('tr');
+            rows.forEach((row, i) => {
+                const qtyEl = row.querySelector('.qty-input');
+                const price = PRODUCTS[i][2];
+                const qty = parseFloat(qtyEl.value) || 0;
+                const subtotal = price * qty;
+                row.querySelector('.subtotal').textContent = subtotal === 0 ? '' : formatNumber(subtotal);
+                grand += subtotal;
+            });
+            grandTotalEl.textContent = formatNumber(grand);
+        }
+
+        document.addEventListener('input', (e) => {
+            if (e.target.classList && e.target.classList.contains('qty-input')) calculateTotals();
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.querySelectorAll('.qty-input').forEach(i => i.value = 0);
+            document.getElementById('cust-name').value = '';
+            document.getElementById('cust-phone').value = '';
+            document.getElementById('cust-address').value = '';
+            document.getElementById('order-no').value = '';
+            calculateTotals();
+        });
+
+        // Export to PDF with professional layout
+        document.getElementById('exportPdfBtn').addEventListener('click', () => {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
+
+            // Header
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Festive Fire', 40, 50);
+
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            const custName = document.getElementById('cust-name').value || '-';
+            const custPhone = document.getElementById('cust-phone').value || '-';
+            const custAddress = document.getElementById('cust-address').value || '-';
+            const orderNo = document.getElementById('order-no').value || '';
+            const today = new Date().toLocaleDateString();
+
+            doc.text(`Date: __/__/2025`, 420, 50);
+            if (orderNo) doc.text(`Order: ${orderNo}`, 420, 66);
+
+            // Customer block
+            doc.setFontSize(11);
+            doc.text('Customer:', 40, 86);
+            doc.setFontSize(10);
+            doc.text(`Name: ${custName}`, 40, 102);
+            doc.text(`Phone: ${custPhone}`, 40, 118);
+            doc.text(`Address: ${custAddress}`, 40, 134);
+
+            // Prepare autoTable data from current table state
+            const tableBodyData = [];
+            const rows = tbody.querySelectorAll('tr');
+            rows.forEach((row, i) => {
+                const name = PRODUCTS[i][0];
+                const unit = PRODUCTS[i][1];
+                const price = formatNumber(PRODUCTS[i][2]);
+                const qty = row.querySelector('.qty-input').value || '0';
+                const subtotal = row.querySelector('.subtotal').textContent || '0';
+                if (parseFloat(qty) > 0) {
+                    tableBodyData.push([(i + 1).toString(), name, unit, price, qty.toString(), subtotal.toString()]);
+                }
+            });
+
+            // If no items selected, export full price list (first 20 rows per page) else export only selected
+            const head = [
+                ['S.No', 'Product', 'Unit', 'Price', 'Qty', 'Subtotal']
+            ];
+
+            if (tableBodyData.length === 0) {
+                // export full price list for catalog style
+                const fullRows = PRODUCTS.map((p, idx) => [(idx + 1).toString(), p[0], p[1], formatNumber(p[2]), '', '']);
+                doc.autoTable({
+                    head,
+                    body: fullRows,
+                    startY: 160,
+                    theme: 'grid',
+                    headStyles: {
+                        fillColor: [115, 115, 115]
+                    },
+                    styles: {
+                        fontSize: 10
+                    }
+                });
+            } else {
+                doc.autoTable({
+                    head,
+                    body: tableBodyData,
+                    startY: 160,
+                    theme: 'striped',
+                    headStyles: {
+                        fillColor: [245, 245, 245]
+                    },
+                    styles: {
+                        fontSize: 10
+                    }
+                });
+            }
+
+            // Totals and footer
+            const finalY = doc.autoTable.previous ? doc.autoTable.previous.finalY + 10 : 300;
+            doc.setFontSize(12);
+            doc.text(`Grand Total:`, 420, finalY + 20);
+
+            doc.setFontSize(9);
+            doc.setTextColor(100);
+            doc.text('Terms: Prices are indicative and subject to change without prior notice. Delivery/taxes extra as applicable.', 40, finalY + 42);
+
+            // // Footer small contact
+            // doc.setFontSize(9);
+            // doc.text('Festive Fire — Phone: +91 7022424617 — festivefire.netlify.app', 40, doc.internal.pageSize.getHeight() - 30);
+
+            // Download file
+            const fileName = `FestiveFire_PriceList_${new Date().toISOString().slice(0,10)}.pdf`;
+            doc.save(fileName);
+        });
+
+        // init
+        document.getElementById('today-date').textContent = new Date().toLocaleDateString();
+        buildTable();
+        calculateTotals();
+    </script>
+</body>
+
+</html>
