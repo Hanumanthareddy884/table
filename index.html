@@ -133,45 +133,64 @@
     <script>
         // Product list copied/adapted from the user's original HTML
         const PRODUCTS = [
-            ["7 cm Electric (10pcs)", "1 PKT / 10 pcs", 9],
-            ["7 cm Color (10pcs)", "1 PKT / 10 pcs", 11],
-            ["10 cm Electric (10pcs)", "1 PKT / 10 pcs", 15],
-            ["10 cm Color (10pcs)", "1 PKT / 10 pcs", 18],
-            ["2 3/4\" Kurvi Special (5pcs)", "1 PKT / 5 pcs", 9],
-            ["3 1/2\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 14],
-            ["4\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 21],
-            ["4\" Gold Laxmi (5pcs)", "1 PKT / 5 pcs", 35],
-            ["Hydro Bomb (10pcs)", "1 PKT / 10 pcs", 100],
-            ["King Bomb (10pcs)", "1 PKT / 10 pcs", 125],
-            ["Classic Bomb (10pcs)", "1 PKT / 10 pcs", 150],
-            ["555 Thunder Bomb (10pcs)", "1 PKT / 10 pcs", 170],
-            ["Digital Bomb (10pcs)", "1 PKT / 10 pcs", 250],
-            ["Kit kat (10pcs)", "1 PKT / 10 pcs", 45],
-            ["Adiyal Paper Bomb 1/2 kg (1pc/box)", "1 BOX / 1 pc", 150],
-            ["Adiyal Paper Bomb 1/4 kg (1pc/box)", "1 BOX / 1 pc", 75],
-            ["Flower Pot Big (10pcs)", "1 PKT / 10 pcs", 69],
-            ["Flower Pot (Ashoka) (10pcs)", "1 PKT / 10 pcs", 125],
-            ["Flower Pot Special (10pcs)", "1 PKT / 10 pcs", 95],
-            ["Flower Pot Bomb (10 pcs/box)", "1 BOX / 10 pcs", 140],
-            ["100 Wala", "1 PKT", 50],
-            ["28 Giant", "1 PKT", 20],
-            ["1k Wala (Prime)", "1 BOX", 260],
-            ["1000 wala premium", "1 BOX", 400],
-            ["Roll Cap(10 pcs)", "1 PKT / 10 pcs", 15],
-            ["Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 110],
-            ["Twinkling Star(10pcs)", "1 PKT / 10 pcs", 30],
+            ["7 cm Electric (10pcs)", "1 PKT / 10 pcs", 14],
+            ["7 cm Color (10pcs)", "1 PKT / 10 pcs", 16],
+            ["10 cm Electric (10pcs)", "1 PKT / 10 pcs", 20],
+            ["10 cm Color (10pcs)", "1 PKT / 10 pcs", 25],
+            ["15 cm Electric (10pcs)", "1 PKT / 10 pcs", 40],
+            ["2 3/4\" Kurvi Special (5pcs)", "1 PKT / 5 pcs", 10.5],
+            ["3 1/2\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 18],
+            ["4\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 30],
+            ["4\" Elephant Delux (5pcs)", "1 PKT / 5 pcs", 45],
+            ["4\" Gold Laxmi (5pcs)", "1 PKT / 5 pcs", 50],
+            ["2 SOUND CRACKERS", "1 PKT / 5 pcs", 59],
+            ["3 SOUND CRACKERS", "1 PKT / 5 pcs", 70],
+            ["28 Giant", "1 PKT", 25],
+            ["100 Wala", "1 PKT", 55],
+            ["24 Tiger Delux ", "1 PKT", 55],
+            ["1000 Wala (Prime)", "1 BOX", 310],
             ["Red Bijili ~(100pcs)", "1 PKT / 100 pcs", 38],
+            ["Red Bijili Brand(100pcs)", "1 PKT / 100 pcs", 52],
+            ["bullet Bomb (10pcs)", "1 PKT / 10 pcs", 45],
+            ["Hydro Bomb (10pcs)", "1 PKT / 10 pcs", 99],
+            ["King Bomb (10pcs)", "1 PKT / 10 pcs", 140],
+            ["Classic Bomb (10pcs)", "1 PKT / 10 pcs", 165],
+            ["Agni Bomb (10pcs)", "1 PKT / 10 pcs", 295],
+            ["Tiger Bomb (10pcs)", "1 PKT / 10 pcs", 315],
+            ["Rider Paper Bomb (5pcs)", "1 PKT / 5 pcs", 170],
+            ["Adiyal Paper Bomb 1/4 kg (1pc/box)", "1 BOX / 1 pc", 81],
+            ["Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 119],
+            ["2 Sound Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 205],
+            ["3 Sound Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 250],
+            ["Sky Shot", "1 pcs", 19],
             ["12 Shot Rider", "1 BOX", 180],
-            ["30 Shot Multi color (Brand)", "1 BOX", 460],
+            ["12 Shot Multicolor", "1 BOX", 280],
+            ["30 Shot Multi color (Brand)", "1 BOX", 510],
             ["50 Shot Rider", "1 BOX", 600],
-            ["Sky Shot", "1 BOX", 15],
-            ["2\" Arial Fancy(3 pcs)", "1 PKT / 3 pcs", 350],
-            ["Chakra big (10pcs)", "1 PKT / 10 pcs", 40],
+            ["2\" Arial Fancy(3 pcs)", "1 PKT / 3 pcs", 510],
+            ["2\" Arial Fancy(1pcs)", " 1 pcs", 169],
+            ["Flower Pot Big (10pcs)", "1 PKT / 10 pcs", 92],
+            ["Flower Pot Special (10pcs)", "1 PKT / 10 pcs", 121],
+            ["Flower Pot (Ashoka) (10pcs)", "1 PKT / 10 pcs", 156],
+            ["Flower Pot Color koti (10pcs)", "1 PKT / 10 pcs", 310],
+            ["Kit kat (10pcs)", "1 PKT / 10 pcs", 60],
+            ["Chota Bheem", "1 PKT / 1 pcs", 30],
+            ["Chit put (5 pcs)", "1 PKT / 5 pcs", 70],
+            ["Magic Pencil (10 pcs)", "1 PKT / 10 pcs", 82],
+            ["Black Money (1pcs/box)", "1 BOX / 1 pc", 70],
+            ["Roll Cap(10 pcs)", "1 PKT / 10 pcs", 16],
+            ["Chakra big (10pcs)", "1 PKT / 10 pcs", 49],
             ["Chakra big (25pcs)", "1 PKT / 25 pcs", 110],
-            ["Chakra Delux (10pcs)", "1 PKT / 10 pcs", 125],
+            ["Chakra Special (10pcs)", "1 PKT / 10 pcs", 99],
+            ["Chakra Delux (10pcs)", "1 PKT / 10 pcs", 150],
             ["Chakra Disco Wheel(5 pcs)", "1 PKT / 5 pcs", 85],
-            ["Twinkling star (10pcs)", "1 PKT / 10 pcs", 20],
-            ["Peacock (5 side)", "1 BOX", 260]
+            ["BUTTER FLY(10pcs)", "1 PKT / 10 pcs", 130],
+            ["BAMBARA CRACKERS (10pcs)", "1 PKT / 10 pcs", 135],
+            ["Helicopter (5pcs)", "1 PKT / 5 pcs", 80],
+            ["Twinkling star (10pcs)", "1 PKT / 10 pcs", 30],
+            ["Peacock feather", "1 BOX /5 pcs", 160],
+            ["Peacock (3 face)", "1 BOX", 240],
+            ["Peacock (5 face)", "1 BOX", 310]
         ];
 
         const tbody = document.querySelector('#price-table tbody');
@@ -245,12 +264,12 @@
             const orderNo = document.getElementById('order-no').value || '';
             const today = new Date().toLocaleDateString();
 
-            doc.text(`Date: __/__/2025`, 420, 50);
+            doc.text(`Date: ____/____/2025`, 420, 50);
             if (orderNo) doc.text(`Order: ${orderNo}`, 420, 66);
 
             // Customer block
             doc.setFontSize(11);
-            doc.text('Customer:', 40, 86);
+            doc.text('Customer Details', 40, 86);
             doc.setFontSize(10);
             doc.text(`Name: ${custName}`, 40, 102);
             doc.text(`Phone: ${custPhone}`, 40, 118);
@@ -259,17 +278,19 @@
             // Prepare autoTable data from current table state
             const tableBodyData = [];
             const rows = tbody.querySelectorAll('tr');
+            let grand_total = 0
             rows.forEach((row, i) => {
                 const name = PRODUCTS[i][0];
                 const unit = PRODUCTS[i][1];
                 const price = formatNumber(PRODUCTS[i][2]);
                 const qty = row.querySelector('.qty-input').value || '0';
                 const subtotal = row.querySelector('.subtotal').textContent || '0';
+                grand_total += parseFloat(row.querySelector('.subtotal').textContent) || 0;
+
                 if (parseFloat(qty) > 0) {
                     tableBodyData.push([(i + 1).toString(), name, unit, price, qty.toString(), subtotal.toString()]);
                 }
             });
-
             // If no items selected, export full price list (first 20 rows per page) else export only selected
             const head = [
                 ['S.No', 'Product', 'Unit', 'Price', 'Qty', 'Subtotal']
@@ -277,7 +298,7 @@
 
             if (tableBodyData.length === 0) {
                 // export full price list for catalog style
-                const fullRows = PRODUCTS.map((p, idx) => [(idx + 1).toString(), p[0], p[1], formatNumber(p[2]), '', '']);
+                const fullRows = PRODUCTS.map((p, idx) => [(idx + 1).toString(), p[0], p[1], '', '', '']);
                 doc.autoTable({
                     head,
                     body: fullRows,
@@ -287,7 +308,8 @@
                         fillColor: [115, 115, 115]
                     },
                     styles: {
-                        fontSize: 10
+                        fontSize: 10,
+                        lineColor: [0, 0, 0], // Dark border color
                     }
                 });
             } else {
@@ -297,7 +319,7 @@
                     startY: 160,
                     theme: 'striped',
                     headStyles: {
-                        fillColor: [245, 245, 245]
+                        fillColor: [115, 115, 115]
                     },
                     styles: {
                         fontSize: 10
@@ -308,18 +330,18 @@
             // Totals and footer
             const finalY = doc.autoTable.previous ? doc.autoTable.previous.finalY + 10 : 300;
             doc.setFontSize(12);
-            doc.text(`Grand Total:`, 420, finalY + 20);
+            doc.text(`Grand Total: ${grand_total}`, 420, finalY + 20);
 
             doc.setFontSize(9);
             doc.setTextColor(100);
             doc.text('Terms: Prices are indicative and subject to change without prior notice. Delivery/taxes extra as applicable.', 40, finalY + 42);
 
             // // Footer small contact
-            // doc.setFontSize(9);
-            // doc.text('Festive Fire — Phone: +91 7022424617 — festivefire.netlify.app', 40, doc.internal.pageSize.getHeight() - 30);
+            doc.setFontSize(9);
+            doc.text('Festive Fire — Phone: +91 7022424617 — festivefire.netlify.app', 40, doc.internal.pageSize.getHeight() - 30);
 
             // Download file
-            const fileName = `FestiveFire_PriceList_${new Date().toISOString().slice(0,10)}.pdf`;
+            const fileName = `${custName} Festive Fire${new Date().toISOString().slice(0,10)}.pdf`;
             doc.save(fileName);
         });
 
@@ -328,6 +350,10 @@
         buildTable();
         calculateTotals();
     </script>
+</body>
+
+</html>
+</script>
 </body>
 
 </html>
