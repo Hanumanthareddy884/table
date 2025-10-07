@@ -133,11 +133,12 @@
     <script>
         // Product list copied/adapted from the user's original HTML
         const PRODUCTS = [
-            ["7 cm Electric (10pcs)", "1 PKT / 10 pcs", 14],
-            ["7 cm Color (10pcs)", "1 PKT / 10 pcs", 16],
-            ["10 cm Electric (10pcs)", "1 PKT / 10 pcs", 20],
-            ["10 cm Color (10pcs)", "1 PKT / 10 pcs", 25],
-            ["15 cm Electric (10pcs)", "1 PKT / 10 pcs", 40],
+            ["7 cm Electric (10pcs)", "1 Box / 10 pcs", 15],
+            ["7 cm Color (10pcs)", "1 Box / 10 pcs", 17],
+            ["10 cm Electric (10pcs)", "1 Box / 10 pcs", 25],
+            ["10 cm Color (10pcs)", "1 Box / 10 pcs", 30],
+            ["15 cm Electric (10pcs)", "1 Box / 10 pcs", 55],
+            ["50 cm Electric (5pcs)", "1 Box / 5 pcs", 210],
             ["2 3/4\" Kurvi Special (5pcs)", "1 PKT / 5 pcs", 10.5],
             ["3 1/2\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 18],
             ["4\" Medium Laxmi (5pcs)", "1 PKT / 5 pcs", 30],
@@ -146,51 +147,55 @@
             ["2 SOUND CRACKERS", "1 PKT / 5 pcs", 59],
             ["3 SOUND CRACKERS", "1 PKT / 5 pcs", 70],
             ["28 Giant", "1 PKT", 25],
-            ["100 Wala", "1 PKT", 55],
+            ["100 Wala", "1 PKT", 60],
             ["24 Tiger Delux ", "1 PKT", 55],
-            ["1000 Wala (Prime)", "1 BOX", 310],
+            ["1000 Wala (Prime)", "1 BOX", 360],
+            ["5000 Wala (Prime)", "1 BOX", 1400],
             ["Red Bijili ~(100pcs)", "1 PKT / 100 pcs", 38],
             ["Red Bijili Brand(100pcs)", "1 PKT / 100 pcs", 52],
-            ["bullet Bomb (10pcs)", "1 PKT / 10 pcs", 45],
-            ["Hydro Bomb (10pcs)", "1 PKT / 10 pcs", 99],
-            ["King Bomb (10pcs)", "1 PKT / 10 pcs", 140],
-            ["Classic Bomb (10pcs)", "1 PKT / 10 pcs", 165],
-            ["Agni Bomb (10pcs)", "1 PKT / 10 pcs", 295],
-            ["Tiger Bomb (10pcs)", "1 PKT / 10 pcs", 315],
-            ["Rider Paper Bomb (5pcs)", "1 PKT / 5 pcs", 170],
-            ["Adiyal Paper Bomb 1/4 kg (1pc/box)", "1 BOX / 1 pc", 81],
-            ["Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 119],
-            ["2 Sound Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 205],
-            ["3 Sound Rocket Bomb (10pcs)", "1 PKT / 10 pcs", 250],
+            ["bullet Bomb (10pcs)", "1 Box / 10 pcs", 50],
+            ["Hydro Bomb (10pcs)", "1 Box / 10 pcs", 99],
+            ["King Bomb (10pcs)", "1 Box / 10 pcs", 145],
+            ["Classic Bomb (10pcs)", "1 Box / 10 pcs", 180],
+            ["Agni Bomb (10pcs)", "1 Box / 10 pcs", 300],
+            ["Tiger Bomb (10pcs)", "1 Box / 10 pcs", 315],
+            ["Rider Paper Bomb (5pcs)", "1 Box / 5 pcs", 170],
+            ["Adiyal Paper Bomb 1/4 kg", "1 Box / 1 pc", 81],
+            ["Rocket Bomb (10pcs)", "1 Box / 10 pcs", 119],
+            ["2 Sound Rocket Bomb (10pcs)", "1 Box / 10 pcs", 199],
+            ["3 Sound Rocket Bomb (10pcs)", "1 Box / 10 pcs", 240],
             ["Sky Shot", "1 pcs", 19],
             ["12 Shot Rider", "1 BOX", 180],
             ["12 Shot Multicolor", "1 BOX", 280],
             ["30 Shot Multi color (Brand)", "1 BOX", 510],
-            ["50 Shot Rider", "1 BOX", 600],
-            ["2\" Arial Fancy(3 pcs)", "1 PKT / 3 pcs", 510],
+            ["50 Shot Rider", "1 BOX", 715],
+            ["2\" Arial Fancy(3 pcs)", "1 BOX / 3 pcs", 510],
             ["2\" Arial Fancy(1pcs)", " 1 pcs", 169],
-            ["Flower Pot Big (10pcs)", "1 PKT / 10 pcs", 92],
-            ["Flower Pot Special (10pcs)", "1 PKT / 10 pcs", 121],
-            ["Flower Pot (Ashoka) (10pcs)", "1 PKT / 10 pcs", 156],
-            ["Flower Pot Color koti (10pcs)", "1 PKT / 10 pcs", 310],
-            ["Kit kat (10pcs)", "1 PKT / 10 pcs", 60],
-            ["Chota Bheem", "1 PKT / 1 pcs", 30],
-            ["Chit put (5 pcs)", "1 PKT / 5 pcs", 70],
-            ["Magic Pencil (10 pcs)", "1 PKT / 10 pcs", 82],
-            ["Black Money (1pcs/box)", "1 BOX / 1 pc", 70],
-            ["Roll Cap(10 pcs)", "1 PKT / 10 pcs", 16],
-            ["Chakra big (10pcs)", "1 PKT / 10 pcs", 49],
-            ["Chakra big (25pcs)", "1 PKT / 25 pcs", 110],
-            ["Chakra Special (10pcs)", "1 PKT / 10 pcs", 99],
-            ["Chakra Delux (10pcs)", "1 PKT / 10 pcs", 150],
-            ["Chakra Disco Wheel(5 pcs)", "1 PKT / 5 pcs", 85],
-            ["BUTTER FLY(10pcs)", "1 PKT / 10 pcs", 130],
-            ["BAMBARA CRACKERS (10pcs)", "1 PKT / 10 pcs", 135],
-            ["Helicopter (5pcs)", "1 PKT / 5 pcs", 80],
-            ["Twinkling star (10pcs)", "1 PKT / 10 pcs", 30],
-            ["Peacock feather", "1 BOX /5 pcs", 160],
-            ["Peacock (3 face)", "1 BOX", 240],
-            ["Peacock (5 face)", "1 BOX", 310]
+            ["Flower Pot Big (10pcs)", "1 Box / 10 pcs", 99],
+            ["Flower Pot Special (10pcs)", "1 Box / 10 pcs", 131],
+            ["Flower Pot (Ashoka) (10pcs)", "1 Box / 10 pcs", 170],
+            ["Flower Pot (Ashoka) Spl (10pcs)", "1 Box / 10 pcs", 200],
+            ["Flower Pot Color koti (10pcs)", "1 Box / 10 pcs", 310],
+            ["Kit kat (10pcs)", "1 Box / 10 pcs", 55],
+            ["Chota Bheem", "1 Box / 1 pcs", 40],
+            ["Chit put (5 pcs)", "1 Box / 5 pcs", 80],
+            ["Magic Pencil (10 pcs)", "1 Box / 10 pcs", 82],
+            ["Black Money (1pcs/box)", "1 Box / 1 pc", 70],
+            ["Roll Cap(10 pcs)", "1 Box / 10 pcs", 16],
+            ["Chakra big (10pcs)", "1 Box / 10 pcs", 49],
+            ["Chakra big (25pcs)", "1 Box / 25 pcs", 110],
+            ["Chakra Special (10pcs)", "1 Box / 10 pcs", 99],
+            ["Chakra Delux (10pcs)", "1 Box / 10 pcs", 150],
+            ["Chakra Disco Wheel(5 pcs)", "1 Box / 5 pcs", 85],
+            ["BUTTER FLY(10pcs)", "1 Box / 10 pcs", 130],
+            ["BAMBARA CRACKERS (5 pcs)", "1 Box / 5 pcs", 135],
+            ["Photo Flash (5 pcs)", "1 Box / 5 pcs", 110],
+            ["Helicopter (5pcs)", "1 Box / 5 pcs", 130],
+            ["Twinkling star (10pcs)", "1 Box / 10 pcs", 34],
+            ["Ashrafi Big", "1 Box / 5 pcs", 79],
+            ["Peacock feather", "1 Box /5 pcs", 170],
+            ["Peacock (3 face)", "1 Box", 240],
+            ["Peacock (5 face)", "1 Box", 310]
         ];
 
         const tbody = document.querySelector('#price-table tbody');
@@ -293,12 +298,14 @@
             });
             // If no items selected, export full price list (first 20 rows per page) else export only selected
             const head = [
-                ['S.No', 'Product', 'Unit', 'Price', 'Qty', 'Subtotal']
+                ['S.No', 'Product', 'Unit', 'Qty']
             ];
 
-            if (tableBodyData.length === 0) {
+            if (tableBodyData.length >= 0) {
                 // export full price list for catalog style
-                const fullRows = PRODUCTS.map((p, idx) => [(idx + 1).toString(), p[0], p[1], '', '', '']);
+                debugger;
+                const fullRows = tableBodyData.map((p, idx) => [(idx + 1).toString(), p[1], p[2], p[4], ]);
+                debugger;
                 doc.autoTable({
                     head,
                     body: fullRows,
@@ -312,20 +319,21 @@
                         lineColor: [0, 0, 0], // Dark border color
                     }
                 });
-            } else {
-                doc.autoTable({
-                    head,
-                    body: tableBodyData,
-                    startY: 160,
-                    theme: 'striped',
-                    headStyles: {
-                        fillColor: [115, 115, 115]
-                    },
-                    styles: {
-                        fontSize: 10
-                    }
-                });
             }
+            // } else {
+            //     doc.autoTable({
+            //         head,
+            //         body: tableBodyData,
+            //         startY: 160,
+            //         theme: 'striped',
+            //         headStyles: {
+            //             fillColor: [115, 115, 115]
+            //         },
+            //         styles: {
+            //             fontSize: 10
+            //         }
+            //     });
+            // }
 
             // Totals and footer
             const finalY = doc.autoTable.previous ? doc.autoTable.previous.finalY + 10 : 300;
